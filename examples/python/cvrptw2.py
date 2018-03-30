@@ -35,7 +35,6 @@ from ortools.constraint_solver import pywrapcp
 from ortools.constraint_solver import routing_enums_pb2
 
 # Distance callback
-
 class CreateDistanceCallback(object): # pylint: disable=too-few-public-methods
     """Creates callback to calculate distances and travel times between points."""
 
@@ -79,7 +78,7 @@ class CreateDemandCallback(object): # pylint: disable=too-few-public-methods
         del to_node
         return self.demands[from_node]
 
-# Service time (proportional to demand) callback.
+# Service time callback.
 class CreateServiceTimeCallback(object): # pylint: disable=too-few-public-methods
     """Creates callback to get service time at each location."""
 
@@ -92,7 +91,7 @@ class CreateServiceTimeCallback(object): # pylint: disable=too-few-public-method
         del to_node
         return self.service_times[from_node]
 
-# Create the travel time callback (equals distance divided by speed).
+# Travel time callback.
 class CreateTravelTimeCallback(object): # pylint: disable=too-few-public-methods
     """Creates callback to get travel times between locations."""
 
@@ -113,7 +112,7 @@ class CreateTravelTimeCallback(object): # pylint: disable=too-few-public-methods
         """Returns the travel time between the two nodes"""
         return self.matrix[from_node][to_node]
 
-# Create total_time callback (equals service time plus travel time).
+# Total time callback (equals service time plus travel time).
 class CreateTotalTimeCallback(object): # pylint: disable=too-few-public-methods
     """Creates callback to get total times between locations."""
 
@@ -136,13 +135,13 @@ class CreateTotalTimeCallback(object): # pylint: disable=too-few-public-methods
         """Returns the total time between the two nodes"""
         return self.matrix[from_node][to_node]
 
+
 def main():
     """Entry point of the program"""
     # Create the data.
-    [locations, demands, start_times, end_times] = create_data_array()
-    num_locations = len(locations)
+    data = CreateDataProblem()
 
-    if num_locations == 0:
+    if data.num_locations == 0:
         print('Specify an instance greater than 0.')
         sys.exit(1)
 
@@ -152,19 +151,19 @@ def main():
     # By default the start of a route is node 0.
     num_vehicles = 5
     depot = 0
-    routing = pywrapcp.RoutingModel(num_locations, num_vehicles, depot)
+    routing = pywrapcp.RoutingModel(data.num_locations, num_vehicles, depot)
     search_parameters = pywrapcp.RoutingModel.DefaultSearchParameters()
     # Setting first solution heuristic (cheapest addition).
     search_parameters.first_solution_strategy = (
         routing_enums_pb2.FirstSolutionStrategy.PATH_CHEAPEST_ARC)
 
     # Callbacks to the distance function.
-    dist_between_locations = CreateDistanceCallback(locations)
+    dist_between_locations = CreateDistanceCallback(data.locations)
     dist_callback = dist_between_locations.distance
     routing.SetArcCostEvaluatorOfAllVehicles(dist_callback)
 
     # Adding capacity dimension constraints.
-    demand_at_locations = CreateDemandCallback(demands)
+    demand_at_locations = CreateDemandCallback(data.demands)
     demands_callback = demand_at_locations.demand
     vehicle_capacity = 100
     null_capacity_slack = 0
@@ -179,15 +178,15 @@ def main():
     # Adding a dimension for time-window constraints and limits on the start times and end times.
     # Time to deliver a package to a customer: 3min/unit
     time_per_demand_unit = 3 * 60
-    service_times = CreateServiceTimeCallback(demands, time_per_demand_unit)
+    service_times = CreateServiceTimeCallback(data.demands, time_per_demand_unit)
     service_time_callback = service_times.service_time
 
     # Travel speed: 80km/h to convert in km/s
     speed = 80 / 3600.
-    travel_times = CreateTravelTimeCallback(locations, dist_callback, speed)
+    travel_times = CreateTravelTimeCallback(data.locations, dist_callback, speed)
     travel_time_callback = travel_times.travel_time
 
-    total_times = CreateTotalTimeCallback(locations, service_time_callback, travel_time_callback)
+    total_times = CreateTotalTimeCallback(data.locations, service_time_callback, travel_time_callback)
     total_time_callback = total_times.total_time
 
     horizon = 24 * 3600
@@ -199,9 +198,9 @@ def main():
                          time)
 
     time_dimension = routing.GetDimensionOrDie(time)
-    for order in xrange(1, num_locations):
-        start = start_times[order]
-        end = end_times[order]
+    for order in xrange(1, data.num_locations):
+        start = data.start_times[order]
+        end = data.end_times[order]
         time_dimension.CumulVar(order).SetRange(start, end)
 
     # Solve the problem.
@@ -252,33 +251,36 @@ def main():
         print('No solution found.')
         sys.exit(2)
 
-def create_data_array():
-    """Creates the data for the problem"""
-    locations = [[82, 76], [96, 44], [50, 5], [49, 8], [13, 7], [29, 89], [58, 30], [84, 39],
-                 [14, 24], [12, 39], [3, 82], [5, 10], [98, 52], [84, 25], [61, 59], [1, 65],
-                 [88, 51], [91, 2], [19, 32], [93, 3], [50, 93], [98, 14], [5, 42], [42, 9],
-                 [61, 62], [9, 97], [80, 55], [57, 69], [23, 15], [20, 70], [85, 60], [98, 5]]
+# Problem Data Definition
+class CreateDataProblem(object):
+    """Stores the data for the problem"""
+    def __init__(self):
+        """Initializes the data for the problem"""
+        self.locations = [[82, 76], [96, 44], [50, 5], [49, 8], [13, 7], [29, 89], [58, 30], [84, 39],
+                     [14, 24], [12, 39], [3, 82], [5, 10], [98, 52], [84, 25], [61, 59], [1, 65],
+                     [88, 51], [91, 2], [19, 32], [93, 3], [50, 93], [98, 14], [5, 42], [42, 9],
+                     [61, 62], [9, 97], [80, 55], [57, 69], [23, 15], [20, 70], [85, 60], [98, 5]]
 
-    demands = [0, 19, 21, 6, 19, 7, 12, 16,
-               6, 16, 8, 14, 21, 16, 3, 22,
-               18, 19, 1, 24, 8, 12, 4, 8,
-               24, 24, 2, 20, 15, 2, 14, 9]
+        self.num_locations = len(self.locations)
 
-    start_times = [0, 5080, 1030, 4930, 2250, 5310, 890, 5650,
-                   5400, 1080, 6020, 4660, 3560, 3030, 3990, 3820,
-                   3620, 5210, 230, 4890, 4450, 3180, 3800, 550,
-                   5740, 5150, 1100, 3100, 3870, 4910, 3280, 730]
+        self.demands = [0, 19, 21, 6, 19, 7, 12, 16,
+                   6, 16, 8, 14, 21, 16, 3, 22,
+                   18, 19, 1, 24, 8, 12, 4, 8,
+                   24, 24, 2, 20, 15, 2, 14, 9]
 
-    # The width of the time window: 5 hours.
-    tw_duration = 5 * 60 * 60
+        self.start_times = [0, 5080, 1030, 4930, 2250, 5310, 890, 5650,
+                       5400, 1080, 6020, 4660, 3560, 3030, 3990, 3820,
+                       3620, 5210, 230, 4890, 4450, 3180, 3800, 550,
+                       5740, 5150, 1100, 3100, 3870, 4910, 3280, 730]
 
-    # In this example, the time window widths is the same at each location, so we define the end
-    # times to be start times + tw_duration.
-    # For problems in which the time window widths vary by location, you can explicitly define the
-    # list of end_times, as we have done for start_times.
-    end_times = [start + tw_duration for start in start_times]
+        # The width of the time window: 5 hours.
+        self.tw_duration = 5 * 60 * 60
 
-    return [locations, demands, start_times, end_times]
+        # In this example, the time window widths is the same at each location, so we define the end
+        # times to be start times + tw_duration.
+        # For problems in which the time window widths vary by location, you can explicitly define
+        # the list of end_times, as we have done for start_times.
+        self.end_times = [start + self.tw_duration for start in self.start_times]
 
 if __name__ == '__main__':
     main()
