@@ -2,56 +2,66 @@
 	xmlns="http://www.w3.org/2000/svg" version="1.1">
 
 <!-- color
-blue: #4285F4
-green: #34A853
 red: #EA4335
+green: #34A853
+blue: #4285F4
 yellow: #FBBC05
 -->
 
 <!-- nodes -->
-<g>
-	<ellipse fill="#e7d4e8" cx="82" cy="76" rx="2" ry="2" stroke="#101010"/>
-  <text text-anchor="middle" x="82" y="76">0</text>
-</g> <!--Node 0-->
+<g><ellipse fill="#F8F8F8"   cx="50" cy="50" rx="2" ry="2" stroke="#101010"/>
+ 	 <text text-anchor="middle" x="50"  y="50" dy="0.5" font-size="2">0</text></g> <!-- Depot -->
 
+<g><ellipse fill="#F8F8F8"   cx="9" cy="6" rx="2" ry="2" stroke="#4285F4"/>
+	 <text text-anchor="middle" x="9"  y="6" dy="0.5" font-size="2">1</text></g>
+<g><ellipse fill="#F8F8F8"   cx="22" cy="9" rx="2" ry="2" stroke="#EA4335"/>
+	 <text text-anchor="middle" x="22"  y="9" dy="0.5" font-size="2">2</text></g>
+<g><ellipse fill="#F8F8F8"   cx="31" cy="13" rx="2" ry="2" stroke="#FBBC05"/>
+	 <text text-anchor="middle" x="31"  y="13" dy="0.5" font-size="2">3</text></g>
+<g><ellipse fill="#F8F8F8"   cx="38" cy="19" rx="2" ry="2" stroke="#4285F4"/>
+	 <text text-anchor="middle" x="38"  y="19" dy="0.5" font-size="2">4</text></g>
+<g><ellipse fill="#F8F8F8"   cx="41" cy="28" rx="2" ry="2" stroke="#34A853"/>
+	 <text text-anchor="middle" x="41"  y="28" dy="0.5" font-size="2">5</text></g>
+<g><ellipse fill="#F8F8F8"   cx="44" cy="41" rx="2" ry="2" stroke="#EA4335"/>
+	 <text text-anchor="middle" x="44"  y="41" dy="0.5" font-size="2">6</text></g>
 
-<g><ellipse fill="#e7d4e8" cx="96" cy="44" rx="2" ry="2" stroke="#404040"/></g>
-<g><ellipse fill="#e7d4e8" cx="50" cy="5"  rx="2" ry="2" stroke="#404040"/></g>
-<g><ellipse fill="#e7d4e8" cx="49" cy="8"  rx="2" ry="2" stroke="#404040"/></g>
-<g><ellipse fill="#e7d4e8" cx="13" cy="7"  rx="2" ry="2" stroke="#404040"/></g>
-<g><ellipse fill="#e7d4e8" cx="29" cy="89" rx="2" ry="2" stroke="#404040"/></g>
-<g><ellipse fill="#e7d4e8" cx="58" cy="30" rx="2" ry="2" stroke="#404040"/></g>
-<g><ellipse fill="#e7d4e8" cx="84" cy="39" rx="2" ry="2" stroke="#404040"/></g>
+<g><ellipse fill="#F8F8F8"   cx="59" cy="44" rx="2" ry="2" stroke="#4285F4"/>
+	 <text text-anchor="middle" x="59"  y="44" dy="0.5" font-size="2">1</text></g>
+<g><ellipse fill="#F8F8F8"   cx="72" cy="41" rx="2" ry="2" stroke="#EA4335"/>
+	 <text text-anchor="middle" x="72"  y="41" dy="0.5" font-size="2">2</text></g>
+<g><ellipse fill="#F8F8F8"   cx="81" cy="38" rx="2" ry="2" stroke="#FBBC05"/>
+	 <text text-anchor="middle" x="81"  y="38" dy="0.5" font-size="2">3</text></g>
+<g><ellipse fill="#F8F8F8"   cx="88" cy="31" rx="2" ry="2" stroke="#4285F4"/>
+	 <text text-anchor="middle" x="88"  y="31" dy="0.5" font-size="2">4</text></g>
+<g><ellipse fill="#F8F8F8"   cx="91" cy="22" rx="2" ry="2" stroke="#34A853"/>
+	 <text text-anchor="middle" x="91"  y="22" dy="0.5" font-size="2">5</text></g>
+<g><ellipse fill="#F8F8F8"   cx="94" cy="9" rx="2" ry="2" stroke="#EA4335"/>
+	 <text text-anchor="middle" x="94"  y="9" dy="0.5" font-size="2">6</text></g>
 
-<g><ellipse fill="#e7d4e8" cx="14" cy="24" rx="2" ry="2" stroke="#000080"/></g>
-<g><ellipse fill="#e7d4e8" cx="12" cy="39" rx="2" ry="2" stroke="#000080"/></g>
-<g><ellipse fill="#e7d4e8" cx="3"  cy="82" rx="2" ry="2" stroke="#000080"/></g>
-<g><ellipse fill="#e7d4e8" cx="5"  cy="10" rx="2" ry="2" stroke="#000080"/></g>
-<g><ellipse fill="#e7d4e8" cx="98" cy="52" rx="2" ry="2" stroke="#000080"/></g>
-<g><ellipse fill="#e7d4e8" cx="84" cy="25" rx="2" ry="2" stroke="#000080"/></g>
-<g><ellipse fill="#e7d4e8" cx="61" cy="59" rx="2" ry="2" stroke="#000080"/></g>
-<g><ellipse fill="#e7d4e8" cx="1"  cy="65" rx="2" ry="2" stroke="#000080"/></g>
+<g><ellipse fill="#F8F8F8"   cx="59" cy="56" rx="2" ry="2" stroke="#4285F4"/>
+	 <text text-anchor="middle" x="59"  y="56" dy="0.5" font-size="2">1</text></g>
+<g><ellipse fill="#F8F8F8"   cx="72" cy="59" rx="2" ry="2" stroke="#EA4335"/>
+	 <text text-anchor="middle" x="72"  y="59" dy="0.5" font-size="2">2</text></g>
+<g><ellipse fill="#F8F8F8"   cx="81" cy="63" rx="2" ry="2" stroke="#FBBC05"/>
+	 <text text-anchor="middle" x="81"  y="63" dy="0.5" font-size="2">3</text></g>
+<g><ellipse fill="#F8F8F8"   cx="88" cy="69" rx="2" ry="2" stroke="#4285F4"/>
+	 <text text-anchor="middle" x="88"  y="69" dy="0.5" font-size="2">4</text></g>
+<g><ellipse fill="#F8F8F8"   cx="91" cy="78" rx="2" ry="2" stroke="#34A853"/>
+	 <text text-anchor="middle" x="91"  y="78" dy="0.5" font-size="2">5</text></g>
+<g><ellipse fill="#F8F8F8"   cx="94" cy="91" rx="2" ry="2" stroke="#EA4335"/>
+	 <text text-anchor="middle" x="94"  y="91" dy="0.5" font-size="2">6</text></g>
 
-<g><ellipse fill="#e7d4e8" cx="88" cy="51" rx="2" ry="2" stroke="#008000"/></g>
-<g><ellipse fill="#e7d4e8" cx="91" cy="2"  rx="2" ry="2" stroke="#008000"/></g>
-<g><ellipse fill="#e7d4e8" cx="19" cy="32" rx="2" ry="2" stroke="#008000"/></g>
-<g><ellipse fill="#e7d4e8" cx="93" cy="3"  rx="2" ry="2" stroke="#008000"/></g>
-<g><ellipse fill="#e7d4e8" cx="50" cy="93" rx="2" ry="2" stroke="#008000"/></g>
-<g><ellipse fill="#e7d4e8" cx="98" cy="14" rx="2" ry="2" stroke="#008000"/></g>
-<g><ellipse fill="#e7d4e8" cx="5"  cy="42" rx="2" ry="2" stroke="#008000"/></g>
-<g><ellipse fill="#e7d4e8" cx="42" cy="9"  rx="2" ry="2" stroke="#008000"/></g>
+<g><ellipse fill="#F8F8F8"   cx="9" cy="94" rx="2" ry="2" stroke="#4285F4"/>
+	 <text text-anchor="middle" x="9"  y="94" dy="0.5" font-size="2">1</text></g>
+<g><ellipse fill="#F8F8F8"   cx="22" cy="91" rx="2" ry="2" stroke="#EA4335"/>
+	 <text text-anchor="middle" x="22"  y="91" dy="0.5" font-size="2">2</text></g>
+<g><ellipse fill="#F8F8F8"   cx="31" cy="87" rx="2" ry="2" stroke="#FBBC05"/>
+	 <text text-anchor="middle" x="31"  y="87" dy="0.5" font-size="2">3</text></g>
+<g><ellipse fill="#F8F8F8"   cx="38" cy="81" rx="2" ry="2" stroke="#4285F4"/>
+	 <text text-anchor="middle" x="38"  y="81" dy="0.5" font-size="2">4</text></g>
+<g><ellipse fill="#F8F8F8"   cx="41" cy="72" rx="2" ry="2" stroke="#34A853"/>
+	 <text text-anchor="middle" x="41"  y="72" dy="0.5" font-size="2">5</text></g>
+<g><ellipse fill="#F8F8F8"   cx="44" cy="59" rx="2" ry="2" stroke="#EA4335"/>
+	 <text text-anchor="middle" x="44"  y="59" dy="0.5" font-size="2">6</text></g>
 
-<g><ellipse fill="#e7d4e8" cx="61" cy="62" rx="2" ry="2" stroke="#800000"/></g>
-<g><ellipse fill="#e7d4e8" cx="9"  cy="97" rx="2" ry="2" stroke="#800000"/></g>
-<g><ellipse fill="#e7d4e8" cx="80" cy="55" rx="2" ry="2" stroke="#800000"/></g>
-<g><ellipse fill="#e7d4e8" cx="57" cy="69" rx="2" ry="2" stroke="#800000"/></g>
-<g><ellipse fill="#e7d4e8" cx="23" cy="15" rx="2" ry="2" stroke="#800000"/></g>
-<g><ellipse fill="#e7d4e8" cx="20" cy="70" rx="2" ry="2" stroke="#800000"/></g>
-<g><ellipse fill="#e7d4e8" cx="85" cy="60" rx="2" ry="2" stroke="#800000"/></g>
-<g><ellipse fill="#e7d4e8" cx="98" cy="5"  rx="2" ry="2" stroke="#800000"/></g>
-
-
-<style><![CDATA[
-text{font: bold 2px Verdana, Helvetica, Arial, sans-serif;}
-]]></style>
 </svg>
