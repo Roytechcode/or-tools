@@ -129,7 +129,10 @@ def main():
     # The number of nodes of the VRP is num_locations.
     # Nodes are indexed from 0 to num_locations - 1.
     # By default the start of a route is node 0.
-    routing = pywrapcp.RoutingModel(data.num_locations, data.num_vehicles, data.depot)
+    routing = pywrapcp.RoutingModel(
+        data.num_locations,
+        data.num_vehicles,
+        data.depot)
 
     # Adding the custom distance function.
     dist_callback = CreateDistanceCallback(data).distance
