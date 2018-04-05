@@ -138,14 +138,22 @@ def main():
     dist_callback = CreateDistanceCallback(data).distance
     routing.SetArcCostEvaluatorOfAllVehicles(dist_callback)
 
-    ## Minimize time variables.
-    #for i in xrange(routing.Size()):
-    #    routing.AddVariableMinimizedByFinalizer(time.CumulVar(i))
-    #for j in xrange(data.num_vehicles):
-    #    routing.AddVariableMinimizedByFinalizer(
-    #        time.CumulVar(routing.Start(j)))
-    #    routing.AddVariableMinimizedByFinalizer(
-    #        time.CumulVar(routing.End(j)))
+    distance = "Distance"
+    routing.AddDimension(dist_callback,
+                         0, # null slack
+                         3000, # maximum distance per vehicle
+                         True, # start cumul to zero
+                         distance)
+    distance_dimension = routing.GetDimensionOrDie(distance)
+
+    ## Minimize distance variables.
+    for i in xrange(routing.Size()):
+        routing.AddVariableMinimizedByFinalizer(distance_dimension.CumulVar(i))
+    #for j in xrange(routing.vehicles()):
+        #routing.AddVariableMinimizedByFinalizer(
+        #    distance_dimension.CumulVar(routing.Start(j)))
+        #routing.AddVariableMinimizedByFinalizer(
+        #    distance_dimension.CumulVar(routing.End(j)))
 
     # Setting first solution heuristic (cheapest addition).
     search_parameters = pywrapcp.RoutingModel.DefaultSearchParameters()
